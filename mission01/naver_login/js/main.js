@@ -27,8 +27,8 @@ function pwReg(text){
 /* -------------------------------------------------------------------------- */
 
 // 1. 입력 폼 데이터 받아오기
-let userEmail = document.querySelector('.user-email-input');
-let userPassword = document.querySelector('.user-password-input');
+const userEmail = document.querySelector('.user-email-input');
+const userPassword = document.querySelector('.user-password-input');
 
 // 2. 각 input 태그에 key 이벤트 붙이기 : 상태 변수 관리
 userEmail.addEventListener('keyup', () => {
@@ -48,6 +48,20 @@ userPassword.addEventListener('keyup', () => {
   }
 });
 
+// 4. 입력 데이터 validation : 로그인 버튼 클릭 시 조건 처리
+// 4-1. 로그인 버튼 클릭 시 이벤트 붙이기
+const loginButton = document.querySelector('.btn-login');
+
+loginButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  // 4-2. 입력 데이터 비교
+  if(user.id === userEmail.value && user.pw === userPassword.value) {
+    window.location.href = 'welcome.html';
+
+  } else {
+    alert('아이디나 비밀번호가 틀렸습니다.');
+  }
+});
 
 
 
