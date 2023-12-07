@@ -27,14 +27,26 @@ function pwReg(text){
 /* -------------------------------------------------------------------------- */
 
 // 1. 입력 폼 데이터 받아오기
-const userEmail = document.querySelector('.user-email-input').value;
-const userPassword = document.querySelector('.user-password-input').value;
+let userEmail = document.querySelector('.user-email-input');
+let userPassword = document.querySelector('.user-password-input');
 
-// 2. 입력 폼 데이터 validation
-const isEmailValid = emailReg(userEmail);
-const isPasswordValid = emailReg(userPassword);
-
-// 3. 각 input 태그에 key 이벤트 붙이기
+// 2. 각 input 태그에 key 이벤트 붙이기 : 상태 변수 관리
+userEmail.addEventListener('keyup', () => {
+  // 3. 입력 폼 데이터 validation
+  if(!emailReg(userEmail.value) && userEmail.value.length > 0) {
+    userEmail.classList.add('is--invalid');
+  } else {
+    userEmail.classList.remove('is--invalid');
+  }
+});
+userPassword.addEventListener('keyup', () => {
+  // 3. 입력 폼 데이터 validation
+  if(!pwReg(userPassword.value) && userPassword.value.length > 0) {
+    userPassword.classList.add('is--invalid');
+  } else {
+    userPassword.classList.remove('is--invalid');
+  }
+});
 
 
 
