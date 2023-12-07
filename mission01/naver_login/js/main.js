@@ -24,6 +24,17 @@ function pwReg(text){
   return re.test(String(text).toLowerCase());
 }
 
+/* -------------------------------------------------------------------------- */
+
+// 1. 입력 폼 데이터 받아오기
+const userEmail = document.querySelector('.user-email-input').value;
+const userPassword = document.querySelector('.user-password-input').value;
+
+// 2. 입력 폼 데이터 validation
+const isEmailValid = emailReg(userEmail);
+const isPasswordValid = emailReg(userPassword);
+
+// 3. 각 input 태그에 key 이벤트 붙이기
 
 
 
