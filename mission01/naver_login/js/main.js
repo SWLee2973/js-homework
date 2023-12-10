@@ -58,7 +58,11 @@ loginButton.addEventListener('click', (e) => {
   if(user.id === userEmail.value && user.pw === userPassword.value) {
     window.location.href = 'welcome.html';
 
-  } else {
+  } else if(userEmail.classList.contains('is--invalid')) {
+    alert('이메일 형식을 확인해 주세요.');
+  } else if(userPassword.classList.contains('is--invalid')) {
+    alert('비밀번호는 특수문자 포함 6자리 이상 입력해 주세요.');
+  } else  {
     alert('아이디나 비밀번호가 틀렸습니다.');
   }
 });
