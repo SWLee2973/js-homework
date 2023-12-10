@@ -57,7 +57,7 @@ loginButton.addEventListener('click', (e) => {
   // 4-2. 입력 데이터 비교
   if(user.id === userEmail.value && user.pw === userPassword.value) {
     window.location.href = 'welcome.html';
-
+  // 5. 입력 데이터 형식 안내 문구 출력
   } else if(userEmail.classList.contains('is--invalid')) {
     alert('이메일 형식을 확인해 주세요.');
   } else if(userPassword.classList.contains('is--invalid')) {
