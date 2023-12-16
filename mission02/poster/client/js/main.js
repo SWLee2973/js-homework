@@ -9,11 +9,12 @@
 */
 
 const navigation = document.querySelector("nav");
+const nickName = document.querySelector('.nickName');
 const visualImage = document.querySelector('.visual img');
+const audio = new Audio();
 
-// 1-1. 클릭 이벤트 활성화 - 이벤트 지정
-navigation.addEventListener("click", function (e) {
-  e.preventDefault();
+// 5. 함수 분리
+function handleClick(e) {
   // 1-2. 클릭 이벤트 활성화
   // console.log(e.target);
   // console.log(e.currentTarget);
@@ -33,6 +34,14 @@ navigation.addEventListener("click", function (e) {
   // 3. 이미지 변경
   visualImage.src = `./assets/${data[index - 1].name.toLowerCase()}.jpeg`;
   // 4. 텍스트 변경
+  nickName.innerHTML = `${data[index - 1]. name}`;
   visualImage.alt = `${data[index - 1].alt}`;
-});
+
+  // 6. 오디오 재생
+  audio.src = `./assets/audio/${data[index-1].name.toLowerCase()}.m4a`;
+  audio.play();
+}
+
+// 1-1. 클릭 이벤트 활성화 - 이벤트 지정
+navigation.addEventListener("click", handleClick);
 
