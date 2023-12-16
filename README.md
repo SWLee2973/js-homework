@@ -4,4 +4,4 @@
 ## [👉🏻미션 01 - 내부 이동](https://github.com/SWLee2973/js-homework/tree/main/mission01/naver_login "미션01 내부로 페이지 이동")
 
 ## [👉🏻미션 02 - 이미지 바꾸기](https://swlee2973.github.io/js-homework/mission02/poster/client/ "미션01 페이지 이동")
-## [👉🏻미션 02 - 내부 이동](https://github.com/SWLee2973/js-homework/tree/main/mission02/poster/client/ "미션01 내부로 페이지 이동")
+## [👉🏻미션 02 - 내부 이동](https://github.com/SWLee2973/js-homework/tree/main/mission02/ "미션01 내부로 페이지 이동")
