@@ -11,7 +11,7 @@
 const navigation = document.querySelector("nav");
 const nickName = document.querySelector('.nickName');
 const visualImage = document.querySelector('.visual img');
-const audio = new Audio();
+
 
 // 5. 함수 분리
 function handleClick(e) {
@@ -38,8 +38,9 @@ function handleClick(e) {
   visualImage.alt = `${data[index - 1].alt}`;
 
   // 6. 오디오 재생
-  audio.src = `./assets/audio/${data[index-1].name.toLowerCase()}.m4a`;
-  audio.play();
+  const source = `./assets/audio/${data[index-1].name.toLowerCase()}.m4a`;
+  const audio = new AudioPlayer(source);
+  audio.loopPlay();
 }
 
 // 1-1. 클릭 이벤트 활성화 - 이벤트 지정
