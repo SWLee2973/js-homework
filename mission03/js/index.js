@@ -1,13 +1,14 @@
 
 const navBar = document.querySelectorAll('.navbar button');
-const slide = document.querySelector('swiper-wrapper');
+const slide = document.querySelector('.swiper-wrapper');
 
 const [loop, prev, play, next, shuffle] = navBar;
-const END_POINT = 'https://swlee2973.github.io/js-homework/mission03/data/data.json';
+const END_POINT = './data/data.json';
 const defaultOptions = {
   method: 'GET',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin':'*'
   }
 }
 
@@ -15,33 +16,80 @@ let loopFlag = false;
 let shuffleFlag = false;
 let isPlay = false;
 
+// swiper 선언
+let swiper;
+
+const getData = async options => {
+  const {url, ...restOptions} = {
+    ...defaultOptions,
+    ...options,
+    headers: {
+      ...defaultOptions.headers,
+      ...options.headers
+    }
+  }
+
+  const response = await fetch(url, restOptions);
+
+  if(response.ok) {
+    response.data = await response.json();
+  }
+
+  return response;
+}
+
+function renderSlide(target, data) {
+  const template = createSlide(data);
+
+  target.insertAdjacentHTML('beforeend', template);
+}
+
+function createSlide(data) {
+  const {thumbnail, artist, musicName:name, lyrics} = data;
+
+  return /* html */ `
+    <div class="swiper-slide">
+      <div class="music-info">
+        <img src="./assets/thumbnails/${thumbnail}" alt="${thumbnail} - ${artist}" />
+        <p class="music-title"><strong>${name}</strong><br />${artist}</p>
+        <div class="lyrics">
+          ${lyrics}
+        </div>
+      </div>               
+    </div>
+  `
+}
 
 async function renderPlaylist() {
 
   try {
-    const response = await cat.get({url: END_POINT});
+    const response = await getData({url: END_POINT});
+    const responseData = response.data;
+    const musicData = responseData.data;
+
+    musicData.forEach(data => renderSlide(slide, data));
+
+    swiper = new Swiper('.swiper', {
+      loop: true,
+      // effect: "cube",
+      cubeEffect: {
+        shadow: false,
+        slideShadows: true,
+        shadowOffset: 20,
+        shadowScale: 0.94,
+      },
+      // autoplay: true,
+      parallax: true,
+      speed: 2000,
+      mousewheel: {
+        forceToAxis: true,
+      }
+    });
+
   } catch(err) {
-    alert(err);
+    console.error(err);
   }
 }
-
-
-const swiper = new Swiper('.swiper', {
-  loop: true,
-  // effect: "cube",
-  cubeEffect: {
-    shadow: false,
-    slideShadows: true,
-    shadowOffset: 20,
-    shadowScale: 0.94,
-  },
-  // autoplay: true,
-  parallax: true,
-  speed: 2000,
-  mousewheel: {
-    forceToAxis: true,
-  }
-});
 
 function createTemplate(tagName, className, contents) {
   const template = /* html */ `
@@ -100,6 +148,7 @@ function handleShuffle(e) {
 }
 
 
+renderPlaylist();
 
 loop.addEventListener('click', handleLoop);
 prev.addEventListener('click', handlePrev);
