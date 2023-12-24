@@ -1,6 +1,8 @@
 
 const navBar = document.querySelectorAll('.navbar button');
 const [loop, prev, play, next, shuffle] = navBar;
+const END_POINT = 'https://swlee2973.github.io/js-homework/mission03/data/data.js';
+
 let loopFlag = false;
 let shuffleFlag = false;
 let isPlay = false;
@@ -78,6 +80,8 @@ function handleShuffle(e) {
   shuffleFlag = !shuffleFlag;
 
 }
+
+
 
 loop.addEventListener('click', handleLoop);
 prev.addEventListener('click', handlePrev);
