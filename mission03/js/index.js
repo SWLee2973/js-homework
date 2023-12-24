@@ -1,11 +1,29 @@
 
 const navBar = document.querySelectorAll('.navbar button');
+const slide = document.querySelector('swiper-wrapper');
+
 const [loop, prev, play, next, shuffle] = navBar;
-const END_POINT = 'https://swlee2973.github.io/js-homework/mission03/data/data.js';
+const END_POINT = 'https://swlee2973.github.io/js-homework/mission03/data/data.json';
+const defaultOptions = {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}
 
 let loopFlag = false;
 let shuffleFlag = false;
 let isPlay = false;
+
+
+async function renderPlaylist() {
+
+  try {
+    const response = await cat.get({url: END_POINT});
+  } catch(err) {
+    alert(err);
+  }
+}
 
 
 const swiper = new Swiper('.swiper', {
