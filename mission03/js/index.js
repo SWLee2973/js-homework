@@ -4,8 +4,8 @@ const [loop, prev, play, next, shuffle] = navBar;
 
 
 const swiper = new Swiper('.swiper', {
-  // loop: true,
-  effect: "cube",
+  loop: true,
+  // effect: "cube",
   cubeEffect: {
     shadow: false,
     slideShadows: true,
@@ -25,12 +25,15 @@ let loopFlag = 0;
 function handleLoop(e) {
 
   if(loopFlag) {
+    // swiper.
 
   }
 
 }
 
 function handlePrev(e) {
+  console.log(this)
+  swiper.slidePrev();
 
 }
 
@@ -38,7 +41,8 @@ function handlePlay(e) {
 }
 
 function handleNext(e) {
-  swiper.next();
+  console.log(this)
+  swiper.slideNext();
 
 }
 
