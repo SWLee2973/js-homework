@@ -1,6 +1,9 @@
 
 const navBar = document.querySelectorAll('.navbar button');
 const [loop, prev, play, next, shuffle] = navBar;
+let loopFlag = false;
+let shuffleFlag = false;
+let isPlay = false;
 
 
 const swiper = new Swiper('.swiper', {
@@ -20,33 +23,59 @@ const swiper = new Swiper('.swiper', {
   }
 });
 
-let loopFlag = 0;
+function createTemplate(tagName, className, contents) {
+  const template = /* html */ `
+    <${tagName} class='${className}'>
+      ${contents}
+    </${tagName}>
+  `;
+  
+  return template;
+}
+
+function toggleTemplate(flag, target, position, template) {
+
+  if(!flag) {
+    target.insertAdjacentHTML(position, template);
+  } else {
+    target.textContent = '';
+  }
+}
 
 function handleLoop(e) {
+  const template = createTemplate('span', 'repeat', 1);
 
-  if(loopFlag) {
-    // swiper.
-
-  }
+  toggleTemplate(loopFlag, this, 'beforeend', template);
+  loopFlag = !loopFlag;
 
 }
 
 function handlePrev(e) {
-  console.log(this)
+  console.log(swiper.realIndex);
   swiper.slidePrev();
 
 }
 
 function handlePlay(e) {
+  if(!isPlay) { 
+    play.classList.add('pause');
+    isPlay = !isPlay;
+  } else {
+    play.classList.remove('pause');
+    isPlay = !isPlay;
+  }
 }
 
 function handleNext(e) {
-  console.log(this)
   swiper.slideNext();
 
 }
 
 function handleShuffle(e) {
+  const template = createTemplate('span', 'shuffleOn', 'ON');
+
+  toggleTemplate(shuffleFlag, this, 'beforeend', template);
+  shuffleFlag = !shuffleFlag;
 
 }
 

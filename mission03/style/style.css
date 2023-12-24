@@ -57,6 +57,7 @@
   display: block;
   margin: 0 auto;
   padding: 30px 10px 0 ;
+
 }
 
 .music-title {
@@ -65,7 +66,7 @@
   margin: 10px 0;
   text-align: center;
   font-size: 1.5rem;
-
+  
   & strong {
     font-size: 2.5rem;
     font-weight: 550;
@@ -77,9 +78,14 @@
   grid-area: lyrics;
   text-align: center;
   margin: 20px 0;
+  margin-right: 10px;
   overflow-y: scroll;
   font-size: 1.3rem;
   line-height: 1.5;
+
+  /* box-shadow: 0 0 5px 5px; */
+  box-shadow: 2px 2px 3px 3px rgba(95, 95, 219, 0.1);
+  filter: drop-shadow(0 0 0.5rem rgba(95, 95, 219));
 
   &::-webkit-scrollbar {
     width: 12px;
@@ -125,12 +131,44 @@
   background: transparent;
   background-size: 500%;
   background-position: 91.072% 38.974%;
+
+  & .repeat {
+    font-size: 1.4rem;
+    font-weight: 700;
+    display: block;
+    width: 100%;
+    /* text-align: center; */
+    text-indent: .5em;
+
+  }
 }
 
 .shuffle {
   background: transparent;
   background-size: 500%;
   background-position: 40.559% 39.449%;
+  position: relative;
+  /* filter: opacity(0.5) drop-shadow(0 0 0 rgb(0, 255, 85)); */
+
+  & .shuffleOn {
+    z-index: 10;
+    display: block;
+    border: 3px solid greenyellow;
+    width: 35%;
+    position: absolute;
+    bottom: 10px;
+    right: 5px;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    line-height: 1;
+    font-weight: 800;
+    padding: 1px;
+    color: rgb(129, 255, 255);
+    text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
 }
 
 .prev, .next {
@@ -154,6 +192,11 @@
   width: 140px;
   height: 140px;
   background: transparent;
-  background-size: 900%;
-  background-position: 89.114% 12.636%; 
+  background-size: 700%;
+  background-position: 67.041% 11.806%;
+  
+  &.pause {
+    background-size: 900%;
+    background-position: 89.114% 12.636%; 
+  }
 }
