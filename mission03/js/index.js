@@ -2,6 +2,13 @@
 const navBar = document.querySelectorAll('.navbar button');
 const slide = document.querySelector('.swiper-wrapper');
 
+
+const timeBar = document.querySelector('.time-bar');
+const timeLine = document.querySelector('.time-line');
+const time = document.querySelector('.time');
+
+const audio = new Audio();
+
 const [loop, prev, play, next, shuffle] = navBar;
 const END_POINT = './data/data.json';
 const defaultOptions = {
@@ -15,6 +22,9 @@ const defaultOptions = {
 let loopFlag = false;
 let shuffleFlag = false;
 let isPlay = false;
+
+// 플레이리스트
+let playList;
 
 // swiper 선언
 let swiper;
@@ -45,10 +55,10 @@ function renderSlide(target, data) {
 }
 
 function createSlide(data) {
-  const {thumbnail, artist, musicName:name, lyrics} = data;
+  const {thumbnail, artist, musicName:name, lyrics, fileName} = data;
 
   return /* html */ `
-    <div class="swiper-slide">
+    <div class="swiper-slide" data-music-name="${fileName}">
       <div class="music-info">
         <img src="./assets/thumbnails/${thumbnail}" alt="${thumbnail} - ${artist}" />
         <p class="music-title"><strong>${name}</strong><br />${artist}</p>
@@ -71,6 +81,7 @@ async function renderPlaylist() {
 
     swiper = new Swiper('.swiper', {
       loop: true,
+      touchRatio: 0,
       // effect: "cube",
       cubeEffect: {
         shadow: false,
@@ -85,6 +96,9 @@ async function renderPlaylist() {
         forceToAxis: true,
       }
     });
+
+    playList = document.querySelectorAll('.swiper-slide');
+    audio.src = `./assets/playLists/${playList[0].dataset.musicName}`;
 
   } catch(err) {
     console.error(err);
@@ -118,24 +132,63 @@ function handleLoop(e) {
 
 }
 
-function handlePrev(e) {
-  console.log(swiper.realIndex);
-  swiper.slidePrev();
-
-}
 
 function handlePlay(e) {
   if(!isPlay) { 
     play.classList.add('pause');
     isPlay = !isPlay;
+    // audio.play();
+    musicPlay();
   } else {
     play.classList.remove('pause');
     isPlay = !isPlay;
+    audio.pause();
+
   }
 }
 
-function handleNext(e) {
-  swiper.slideNext();
+function getRandom(currentNum, num) {
+  
+  let number = num + 1;
+  do {
+    number = Math.floor(Math.random() * num);
+  } while(currentNum == number);
+
+  return number;
+
+}
+
+function musicPlay(index) {
+  if(!index) index = swiper.realIndex;
+  if(index < 0) index = playList.length - 1;
+  // audio.
+  audio.src = `./assets/playLists/${playList[index].dataset.musicName}`;
+  audio.play();
+
+  isPlay = true;
+  play.classList.add('pause');
+}
+
+function handlePrev(e) {
+  const currentIndex = swiper.realIndex;
+
+  swiper.slidePrev();
+  musicPlay((currentIndex-1) % playList.length);
+}
+
+
+function handleNext() {
+  const currentIndex = swiper.realIndex;
+  const randomNum = getRandom(currentIndex, playList.length);
+
+  
+  if(shuffleFlag) {
+    swiper.slideTo(randomNum, 2000, false);
+    musicPlay((randomNum) % playList.length);
+  } else {
+    swiper.slideNext();
+    musicPlay((currentIndex+1) % playList.length);
+  }
 
 }
 
@@ -155,3 +208,5 @@ prev.addEventListener('click', handlePrev);
 play.addEventListener('click', handlePlay);
 next.addEventListener('click', handleNext);
 shuffle.addEventListener('click', handleShuffle);
+
+audio.addEventListener('ended', handleNext);
