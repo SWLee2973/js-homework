@@ -7,11 +7,12 @@ const timeBar = document.querySelector('.time-bar');
 const timeLine = document.querySelector('.time-line');
 const time = document.querySelector('.time');
 
+const volumeBox = document.querySelector('.volume-box');
 const volumeBar = document.querySelector('#volume');
 
 const audio = new Audio();
 
-const [loop, prev, play, next, shuffle] = navBar;
+const [volume, prev, play, next, loop, shuffle] = navBar;
 const END_POINT = './data/data.json';
 const defaultOptions = {
   method: 'GET',
@@ -61,13 +62,11 @@ function createSlide(data) {
 
   return /* html */ `
     <div class="swiper-slide" data-music-name="${fileName}">
-      <div class="music-info">
         <img src="./assets/thumbnails/${thumbnail}" alt="${thumbnail} - ${artist}" />
         <p class="music-title"><strong>${name}</strong><br />${artist}</p>
         <div class="lyrics">
           ${lyrics}
         </div>
-      </div>               
     </div>
   `
 }
@@ -233,7 +232,11 @@ function handleTimeline(e) {
   audio.currentTime = audio.duration * (selectTarget / 100);
 }
 
-function handleVolume(e) {
+function handleVolume() {
+  volumeBox.classList.toggle('is-active');
+}
+
+function handleVolumeChange() {
   audio.volume = this.value / 100;
 }
 
@@ -247,7 +250,8 @@ shuffle.addEventListener('click', handleShuffle);
 
 timeBar.addEventListener('click', handleTimeline);
 
-volumeBar.addEventListener('change', handleVolume);
+volume.addEventListener('click', handleVolume)
+volumeBar.addEventListener('change', handleVolumeChange);
 
 audio.addEventListener('timeupdate', handleTimer);
 audio.addEventListener('ended', () => {
