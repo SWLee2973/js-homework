@@ -7,6 +7,8 @@ const timeBar = document.querySelector('.time-bar');
 const timeLine = document.querySelector('.time-line');
 const time = document.querySelector('.time');
 
+const volumeBar = document.querySelector('#volume');
+
 const audio = new Audio();
 
 const [loop, prev, play, next, shuffle] = navBar;
@@ -231,6 +233,9 @@ function handleTimeline(e) {
   audio.currentTime = audio.duration * (selectTarget / 100);
 }
 
+function handleVolume(e) {
+  audio.volume = this.value / 100;
+}
 
 renderPlaylist();
 
@@ -241,6 +246,8 @@ next.addEventListener('click', handleNext);
 shuffle.addEventListener('click', handleShuffle);
 
 timeBar.addEventListener('click', handleTimeline);
+
+volumeBar.addEventListener('change', handleVolume);
 
 audio.addEventListener('timeupdate', handleTimer);
 audio.addEventListener('ended', () => {

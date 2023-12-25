@@ -243,3 +243,52 @@
     background-position: 89.114% 12.636%; 
   }
 }
+
+input[type="range"] {
+  overflow: hidden;
+  height: 33px;
+  -webkit-appearance: none;
+  margin: 10px 0;
+  width: 80%;
+  background: transparent;
+}
+
+input[type="range"]:focus {
+	outline: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 80%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid #ff96ab;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 30px;
+    height: 30px;
+    background: #83aae0;
+    box-shadow: 1px 1px 7px #d16a6e;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: -100vw 0 0 100vw rgba(33, 122, 244, .1);
+}
+
+.volume-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 20px;
+
+  height: 33px;
+
+  & .volume-icon {
+    width: 33px;
+    height: 33px;
+    background-image: url('../assets/images/volume.png');
+    background-size: cover;
+  }
+}
