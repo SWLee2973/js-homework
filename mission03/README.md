@@ -46,5 +46,22 @@
 > 1. 23일 밤~24일 작업은 여기서 끝!
 
 ### 6) `swiperjs` 내장 함수를 통한 셔플 기능 및 음악 재생
+* 플레이리스트 길이 내에서 중복 없이 랜덤 값 생성
+* 랜덤 값을 `swiper.slideTo()`에 전달
+* 멜X에서도 셔플일때 이전 음악은 셔플하지 않아서 다음 음악 재생시만..
+> ![셔플재생](./screenshots/셔플%20재생.gif)
 
+### 7) 1곡 반복 재생 
+* `audio` 객체에 `'ended'` 이벤트 추가
+* `loopFlag = true` 일 경우 `audio.currentTime` 값을 0으로 조정 후 재생
 
+### 8) 재생 타임라인(프로그레스 바)
+* `audio` 객체에 `'timeupdate'` 이벤트 추가
+* `audio.currentTime`, `audio.duration`을 활용해 진행시간 및 진행도 계산
+> ![재생 타임라인](./screenshots/재생%20타임라인.gif)
+> 1. 시작은 swiper 갖고 놀기였으나.. web api에 대해서 알아가는 시간이 되어버림
+> 2. 여기까지 사용한 swiper 옵션을 정리하면..
+  >> * `swiper.touchRatio` : 마우스 드래그 금지
+  >> * `swiper.realIndex` : 현재 슬라이드의 index
+  >> * `swiper.slidePrev()` / `swiper.slideNext()` : 이전/다음 슬라이드 이동
+  >> * `swiper.slideTo()` : 지정한 슬라이드 인덱스로 이동
