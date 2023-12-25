@@ -209,4 +209,10 @@ play.addEventListener('click', handlePlay);
 next.addEventListener('click', handleNext);
 shuffle.addEventListener('click', handleShuffle);
 
-audio.addEventListener('ended', handleNext);
+audio.addEventListener('ended', () => {
+  if(!loopFlag) handleNext();
+  else {
+    audio.currentTime = 0;
+    audio.play();
+  }
+});
