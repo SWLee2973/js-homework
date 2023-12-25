@@ -64,6 +64,7 @@
   /* border: 1px solid yellow; */
   grid-area: title;
   margin: 10px 0;
+  margin-right: 50px;
   text-align: center;
   font-size: 1.5rem;
   
@@ -78,7 +79,7 @@
   grid-area: lyrics;
   text-align: center;
   margin: 20px 0;
-  margin-right: 10px;
+  margin-right: 50px;
   overflow-y: scroll;
   font-size: 1.3rem;
   line-height: 1.5;
@@ -111,13 +112,13 @@
   justify-items: center;
   position: absolute;
   left: 0;
-  bottom: 50px;
+  bottom: 35px;
   z-index: 1;
   grid-template-rows: 1fr auto;
   grid-template-areas: 
     "audio audio audio audio audio"
     "loop prev play next shuffle";
-  row-gap: 15px;
+  row-gap: 30px;
 }
 
 .navbar button {
