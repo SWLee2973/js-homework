@@ -65,3 +65,7 @@
   >> * `swiper.realIndex` : 현재 슬라이드의 index
   >> * `swiper.slidePrev()` / `swiper.slideNext()` : 이전/다음 슬라이드 이동
   >> * `swiper.slideTo()` : 지정한 슬라이드 인덱스로 이동
+
+### 9) 타임라인 핸들링
+* 타임라인 위치 클릭 시 클릭 지점에서 노래재생
+> ![타임라인 핸들링](./screenshots/타임라인%20핸들링.gif)

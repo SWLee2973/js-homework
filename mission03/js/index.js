@@ -220,6 +220,17 @@ function handleTimer(e) {
 
 }
 
+function handleTimeline(e) {
+  const bar = e.target.closest('.time-bar');
+  const target = e.offsetX;
+  const width = bar.offsetWidth;
+
+  const selectTarget = ((target / width) * 100).toFixed(2);
+
+  timeLine.style.width = `${selectTarget}%`;
+  audio.currentTime = audio.duration * (selectTarget / 100);
+}
+
 
 renderPlaylist();
 
@@ -228,6 +239,8 @@ prev.addEventListener('click', handlePrev);
 play.addEventListener('click', handlePlay);
 next.addEventListener('click', handleNext);
 shuffle.addEventListener('click', handleShuffle);
+
+timeBar.addEventListener('click', handleTimeline);
 
 audio.addEventListener('timeupdate', handleTimer);
 audio.addEventListener('ended', () => {
