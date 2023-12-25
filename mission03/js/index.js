@@ -137,8 +137,8 @@ function handlePlay(e) {
   if(!isPlay) { 
     play.classList.add('pause');
     isPlay = !isPlay;
-    // audio.play();
-    musicPlay();
+    audio.play();
+    // musicPlay();
   } else {
     play.classList.remove('pause');
     isPlay = !isPlay;
@@ -200,6 +200,26 @@ function handleShuffle(e) {
 
 }
 
+function handleTimer(e) {
+  let currentTime = audio.currentTime;
+  let duration = audio.duration;
+  if(isNaN(duration)) duration = 0;
+
+  let progress = ((currentTime / duration) * 100).toFixed(2);
+  if(isNaN(progress)) progress = 0;
+
+  let ctMinute = Math.floor(currentTime / 60)
+  let ctSecond = Math.floor(currentTime % 60).toString().padStart(2, '0');
+  let duMinute = Math.floor(duration / 60)
+  let duSecond = Math.floor(duration % 60).toString().padStart(2, '0');
+
+  const timeStamp = `${ctMinute}:${ctSecond} / ${duMinute}:${duSecond}`;
+
+  timeLine.style.width = `${progress}%`;
+  time.textContent = timeStamp;
+
+}
+
 
 renderPlaylist();
 
@@ -209,6 +229,7 @@ play.addEventListener('click', handlePlay);
 next.addEventListener('click', handleNext);
 shuffle.addEventListener('click', handleShuffle);
 
+audio.addEventListener('timeupdate', handleTimer);
 audio.addEventListener('ended', () => {
   if(!loopFlag) handleNext();
   else {
