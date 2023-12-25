@@ -200,12 +200,12 @@
   & .shuffleOn {
     z-index: 10;
     display: block;
-    border: 3px solid rgb(29, 147, 151);
+    /* border: 3px solid rgb(29, 147, 151); */
     width: 35%;
     position: absolute;
-    bottom: 10px;
+    top: 8px;
     right: 5px;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     border-radius: 8px;
     line-height: 1;
     font-weight: 800;
